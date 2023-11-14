@@ -15,7 +15,6 @@ import {
 import Step from "@mui/material/Step";
 import StepContent from "@mui/material/StepContent";
 import StepLabel from "@mui/material/StepLabel";
-import Hidden from "@mui/material/Hidden";
 import Stepper from "@mui/material/Stepper";
 import { useFormik } from "formik";
 import Head from "next/head";
@@ -168,62 +167,60 @@ const Page = () => {
         <title>Login | Devias Kit</title>
       </Head>
       <Grid container sx={{ flex: "1 1 auto" }}>
-        <Hidden only={["xs"]}>
-          <Grid
-            xs={0}
-            lg={4}
-            sx={{
-              alignItems: "center",
-              background:
-                "radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)",
-              background: `url("/assets/left.jpg")`,
-              padding: "20px",
+        <Grid
+          xs={0}
+          lg={4}
+          sx={{
+            display: { xl: "flex", xs: "none" },
+            alignItems: "center",
+            background:
+              "radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)",
+            background: `url("/assets/left.jpg")`,
+            padding: "20px",
 
-              color: "white",
+            color: "white",
+            flexDirection: "column",
+            justifyContent: "center",
+            "& img": {
+              maxWidth: "100%",
+            },
+          }}
+        >
+          <Box sx={{ marginTop: "120px" }}>
+            <img
+              alt=""
+              src="/assets/logo.svg"
+              style={{ marginBottom: "120px" }}
+            />
+            <StyleStepConnectorLine>
+              <Stepper activeStep={activeStep} orientation="vertical">
+                {steps.map((step, index) => (
+                  <Step key={step.label}>
+                    <StepLabel StepIconComponent={QontoStepIcon}>
+                      {step.label}
+                    </StepLabel>
+                    <StepContent>
+                      <Typography>{step.description}</Typography>
+                    </StepContent>
+                  </Step>
+                ))}
+              </Stepper>
+            </StyleStepConnectorLine>
+          </Box>
+          <div
+            style={{
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              "& img": {
-                maxWidth: "100%",
-              },
+              marginTop: "auto",
+              marginBottom: "15px",
+              gap: "40px",
+              color: "#50CD89",
             }}
           >
-            <Box sx={{ marginTop: "120px" }}>
-              <img
-                alt=""
-                src="/assets/logo.svg"
-                style={{ marginBottom: "120px" }}
-              />
-              <StyleStepConnectorLine>
-                <Stepper activeStep={activeStep} orientation="vertical">
-                  {steps.map((step, index) => (
-                    <Step key={step.label}>
-                      <StepLabel StepIconComponent={QontoStepIcon}>
-                        {step.label}
-                      </StepLabel>
-                      <StepContent>
-                        <Typography>{step.description}</Typography>
-                      </StepContent>
-                    </Step>
-                  ))}
-                </Stepper>
-              </StyleStepConnectorLine>
-            </Box>
-            <div
-              style={{
-                display: "flex",
-                marginTop: "auto",
-                marginBottom: "15px",
-                gap: "40px",
-                color: "#50CD89",
-              }}
-            >
-              <div>Terms</div>
-              <div>Plans</div>
-              <div>Contact Us</div>
-            </div>
-          </Grid>
-        </Hidden>
+            <div>Terms</div>
+            <div>Plans</div>
+            <div>Contact Us</div>
+          </div>
+        </Grid>
         {activeStep === 0 ? (
           <AccountTypeComponent
             accountType={accountType}
