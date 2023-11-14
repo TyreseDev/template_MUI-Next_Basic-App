@@ -28,6 +28,8 @@ export const AccountTypeComponent = (props) => {
   return (
     <Grid
       xs={12}
+      sm={12}
+      md={8}
       lg={8}
       sx={{
         backgroundColor: "background.paper",
@@ -49,7 +51,11 @@ export const AccountTypeComponent = (props) => {
           <Typography variant="h4" sx={{ textAlign: "left" }} mr={"auto"}>
             Choose an account type
           </Typography>
-          <Typography variant="h7" sx={{ textAlign: "left", color: "gray" }} mr={"auto"}>
+          <Typography
+            variant="h7"
+            sx={{ textAlign: "left", color: "gray" }}
+            mr={"auto"}
+          >
             If you need more info, please visit our{" "}
             <Link
               href="/help"
@@ -76,7 +82,9 @@ export const AccountTypeComponent = (props) => {
                 transition: "background-color .3s ease-in-out",
                 backgroundColor: `${accountType === 0 ? "#EEF6FF" : ""}`,
                 "&:hover": {
-                  backgroundColor: `${accountType === 0 ? "#EEF6FF" : "rgba(0, 0, 0, 0.1)"}`,
+                  backgroundColor: `${
+                    accountType === 0 ? "#EEF6FF" : "rgba(0, 0, 0, 0.1)"
+                  }`,
                 },
               }}
               onClick={() => setAccountType(0)}
@@ -90,7 +98,9 @@ export const AccountTypeComponent = (props) => {
               <Box>
                 <Stack>
                   <Typography sx={{ fontWeight: "bold" }}>Creator</Typography>
-                  <Typography sx={{ color: "gray" }}>Sign-up as a creator</Typography>
+                  <Typography sx={{ color: "gray" }}>
+                    Sign-up as a creator
+                  </Typography>
                 </Stack>
               </Box>
             </Stack>
@@ -108,7 +118,9 @@ export const AccountTypeComponent = (props) => {
                 transition: "background-color .3s ease-in-out",
                 backgroundColor: `${accountType === 1 ? "#EEF6FF" : ""}`,
                 "&:hover": {
-                  backgroundColor: `${accountType === 1 ? "#EEF6FF" : "rgba(0, 0, 0, 0.1)"}`,
+                  backgroundColor: `${
+                    accountType === 1 ? "#EEF6FF" : "rgba(0, 0, 0, 0.1)"
+                  }`,
                 },
               }}
               onClick={() => setAccountType(1)}
@@ -122,7 +134,9 @@ export const AccountTypeComponent = (props) => {
               <Box>
                 <Stack>
                   <Typography sx={{ fontWeight: "bold" }}>Agency</Typography>
-                  <Typography sx={{ color: "gray" }}>Sign-up as an agency</Typography>
+                  <Typography sx={{ color: "gray" }}>
+                    Sign-up as an agency
+                  </Typography>
                 </Stack>
               </Box>
             </Stack>
