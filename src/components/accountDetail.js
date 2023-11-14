@@ -109,7 +109,8 @@ export const AccountDetailComponent = (props) => {
           sx={{
             maxWidth: 550,
             px: 3,
-            py: "100px",
+            pt: "100px",
+            pb: "60px",
             width: "100%",
           }}
         >
