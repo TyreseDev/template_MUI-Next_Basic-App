@@ -26,6 +26,7 @@ export function createTheme() {
     shape: {
       borderRadius: 8
     },
-    typography
+    typography,
+    
   });
 }

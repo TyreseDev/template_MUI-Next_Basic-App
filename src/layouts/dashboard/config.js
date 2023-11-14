@@ -7,16 +7,19 @@ import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { SvgIcon } from '@mui/material';
+import * as React from "react";
+// import { ReactComponent as homeIcon } from './assets/home-3.svg';
 
 export const items = [
   {
     title: 'Home',
-    path: '/',
+    path: '/dashboard',
     icon: (
       // <SvgIcon fontSize="small">
       //   <ChartBarIcon />
       // </SvgIcon>
       <img src="assets/home-3.svg"></img>
+      // <homeIcon/>
     )
   },
   {

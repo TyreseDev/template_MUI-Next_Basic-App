@@ -18,8 +18,13 @@ import { Scrollbar } from 'src/components/scrollbar';
 import { getInitials } from 'src/utils/get-initials';
 import Pagination from '@mui/material/Pagination';
 import { SeverityPill } from 'src/components/severity-pill';
-
-
+import { styled } from "@mui/material/styles";
+const StyledPagination = styled(Pagination)(() => ({
+  "& .Mui-selected": {
+    backgroundColor:"#3E97FF!important",
+    color: "white"
+  }
+}));
 export const CustomersTable = (props) => {
   const {
     count = 0,
@@ -32,7 +37,8 @@ export const CustomersTable = (props) => {
     onSelectOne,
     page = 0,
     rowsPerPage = 0,
-    selected = []
+    selected = [],
+    searchText
   } = props;
 
   const selectedSome = (selected.length > 0) && (selected.length < items.length);
@@ -76,7 +82,16 @@ export const CustomersTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((customer) => {
+              {items
+              .filter(row => {
+                if(searchText!=undefined)
+                if(row.id.toLowerCase().includes(searchText.toLowerCase())
+                ||row.dateRemoved.toLowerCase().includes(searchText.toLowerCase())
+                ||row.link.toLowerCase().includes(searchText.toLowerCase())
+                ||row.source.toLowerCase().includes(searchText.toLowerCase())
+                ||row.action.toLowerCase().includes(searchText.toLowerCase()))return row;
+              })
+              .map((customer) => {
                 const isSelected = selected.includes(customer.id);
                 // const createdAt = format(customer.createdAt, 'dd/MM/yyyy');
 
@@ -151,7 +166,7 @@ export const CustomersTable = (props) => {
           Total Results: 455
         </div>
         <div style={{display: "flex", width: "100%"}}>
-          <Pagination 
+          <StyledPagination 
             component="div"
             count={count}
             onPageChange={onPageChange}

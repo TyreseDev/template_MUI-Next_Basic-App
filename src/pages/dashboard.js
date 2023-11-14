@@ -22,7 +22,7 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { CustomersTable } from "src/sections/customer/customers-table";
 import { CustomersSearch } from "src/sections/customer/customers-search";
 import { applyPagination } from "src/utils/apply-pagination";
-import { styled } from "@mui/material/styles";
+import { styled, div } from "@mui/material/styles";
 
 const now = new Date();
 
@@ -198,7 +198,8 @@ const Page = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    setSearchText(value);
+    setSearchText(event.target.value);
+    event.target.focus()
   };
 
   const handleRowsPerPageChange = useCallback((event) => {
@@ -212,13 +213,16 @@ const Page = () => {
     },
   }));
 
-  const StyledTextField = styled(TextField)(({ theme }) => ({
+  const StyledTextField = styled("div")(({ theme }) => ({
     "& .MuiInputBase-input": {
       padding: "8px 12px 8px 0",
     },
     "& .MuiInputAdornment-root": {
       marginTop: "0 !important"
-    }
+    },
+    "& .MuiInputBase-input::placeholder": {
+      color: "grey",
+    },
   }));
 
   return (
@@ -237,7 +241,7 @@ const Page = () => {
           <Stack spacing={3}>
             <div style={{ marginLeft: "auto" }}>
               <span>Sort by</span>
-              <StyledSelect value="today" sx={{ marginLeft: "8px" }}>
+              <StyledSelect value="today" sx={{ marginLeft: "8px",width: 100, backgroundColor: "white" }}>
                 <MenuItem value="today">Today</MenuItem>
               </StyledSelect>
             </div>
@@ -400,38 +404,57 @@ const Page = () => {
             <div style={{ borderRadius: 10, padding: 30, backgroundColor: "white" }}>
               <div style={{display: "flex", justifyContent:"space-between", paddingBottom: 10}}>
                   <div style={{ padding: 0, backgroundColor:"#F9F9F9" }}>
-                    <StyledTextField
-                      // error={!!(formik.touched.firstName && formik.errors.firsName)}
-                      style={{ width: 180, }}
-                      // helperText={formik.touched.firstName && formik.errors.firstName}
-                      id="standard-basic"
-
-                      // label="Search"
-                      placeholder="Search"
-                      name="search"
-                      // InputLabelProps={{
-                      //   style: { display: 'none'},
-                      // }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        ),
+                    {/* <StyledTextField> */}
+                    <style
+                      dangerouslySetInnerHTML={{
+                        __html: `
+                          .my-input .MuiInputBase-input {
+                            padding: 8px 12px 8px 0;
+                          }
+                          .my-input .MuiInputAdornment-root {
+                            margin-top: 0 !important;
+                          }
+                          .my-input .MuiInputBase-input::placeholder {
+                            color: grey;
+                          }
+                        `,
                       }}
-                      // onBlur={formik.handleBlur}
-                      onChange={handleChange}
-                      type="text"
-                      // variant="standard"
-                      value={searchText}
                     />
+                      <TextField
+                        // error={!!(formik.touched.firstName && formik.errors.firsName)}
+                        style={{ width: 180, }}
+                        // helperText={formik.touched.firstName && formik.errors.firstName}
+                        id="standard-basic"
+
+                        // label="Search"
+                        placeholder="Search"
+
+                        name="search"
+                        className="my-input"
+                        // InputLabelProps={{
+                        //   style: { display: 'none'},
+                        // }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          ),
+                        }}
+                        // onBlur={formik.handleBlur}
+                        onChange={handleChange}
+                        type="text"
+                        // variant="standard"
+                        value={searchText}
+                      />
+                    {/* </StyledTextField> */}
                      {/* <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
         <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Search" variant="standard" />
       </Box> */}
                   </div>
 
-                <div style={{display: "flex"}}>
+                <div style={{display: "flex", gap: 10}}>
                   <div  style={{
                         margin: "auto" ,
                         backgroundColor:"#EEF6FF",
@@ -440,7 +463,9 @@ const Page = () => {
                         paddingBottom: 10,
                         paddingLeft: 5,
                         paddingRight: 5,
-                        display: "flex"
+                        display: "flex",
+                        width: 100,
+                        cursor: "pointer"
                       }}
                       >
                       <div><img src={"/assets/arrows.svg"}/></div>
@@ -453,18 +478,19 @@ const Page = () => {
                 
                   </div>
                   <div style={{ margin: "auto" }}>
-                    <StyledSelect value="today" sx={{ marginLeft: "8px" }}>
+                    <StyledSelect value="today" sx={{ marginLeft: "8px",  width: 100, backgroundColor: "#F9F9F9"  }}>
                       <MenuItem value="today">Today</MenuItem>
                     </StyledSelect>
                   </div>
                   <div style={{ margin: "auto" }}>
-                    <StyledSelect value="today" sx={{ marginLeft: "8px" }}>
+                    <StyledSelect value="today" sx={{ marginLeft: "8px",  width: 100, backgroundColor: "#F9F9F9" }}>
                       <MenuItem value="today">Status</MenuItem>
                     </StyledSelect>
                   </div>
                 </div>
               </div>
               <CustomersTable
+                searchText={searchText}
                 count={data.length}
                 items={customers}
                 onDeselectAll={customersSelection.handleDeselectAll}

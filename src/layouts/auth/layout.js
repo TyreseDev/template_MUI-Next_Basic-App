@@ -1,7 +1,9 @@
-import PropTypes from "prop-types";
-import NextLink from "next/link";
-import { Box, Typography, Unstable_Grid2 as Grid } from "@mui/material";
-import { Logo } from "src/components/logo";
+import PropTypes from 'prop-types';
+import NextLink from 'next/link';
+import { Box, Typography, Unstable_Grid2 as Grid } from '@mui/material';
+import { Logo } from 'src/components/logo';
+import backgroundImage from 'public/assets/Left.jpg';
+
 
 // TODO: Change subtitle text
 
@@ -12,8 +14,8 @@ export const Layout = (props) => {
     <Box
       component="main"
       sx={{
-        display: "flex",
-        flex: "1 1 auto",
+        display: 'flex',
+        flex: '1 1 auto'
       }}
     >
       {children}
@@ -111,5 +113,5 @@ export const Layout = (props) => {
 };
 
 Layout.prototypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };

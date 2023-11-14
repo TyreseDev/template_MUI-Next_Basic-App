@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useCallback, useState } from "react";
+
 import {
   Alert,
   Box,
@@ -16,16 +17,51 @@ import {
   Divider,
 } from "@mui/material";
 import NextLink from "next/link";
-import { Logo } from "src/components/logo";
+// import { Logo } from "src/components/logo";
 import {
   FacebookLoginButton,
   TwitterLoginButton,
   GoogleLoginButton,
   AppleLoginButton,
 } from "react-social-login-buttons";
+import IconButton from '@mui/material/IconButton';
 
+import { styled } from "@mui/material/styles";
+import InputAdornment from '@mui/material/InputAdornment';
+
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+
+  "& .MuiInputBase-root": {
+    height: 40,
+  },
+  "& .MuiInputBase-input": {
+    padding: "10px 12px 8px 0",
+    marginLeft: 10,
+    height: 40,
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: "grey",
+  },
+}));
 export const AccountDetailComponent = (props) => {
   const { formik } = props;
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
+
+  const handleMouseDownConfirmPassword = (event) => {
+    event.preventDefault();
+  };
+
 
   return (
     <Grid
@@ -38,7 +74,7 @@ export const AccountDetailComponent = (props) => {
         position: "relative",
       }}
     >
-      <Box
+      {/* <Box
         component="header"
         sx={{
           left: 0,
@@ -59,7 +95,7 @@ export const AccountDetailComponent = (props) => {
         >
           <Logo />
         </Box>
-      </Box>
+      </Box> */}
       <Box
         sx={{
           backgroundColor: "background.paper",
@@ -86,15 +122,67 @@ export const AccountDetailComponent = (props) => {
               justifyContent={"center"}
             >
               <Typography variant="h4">Account Details</Typography>
-              <Typography variant="body2" sx={{ color: "gray" }}>
+              <Typography variant="body3" sx={{ color: "gray" }}>
                 Add your personal info
               </Typography>
             </Stack>
-            <Stack direction={`vertical`} display={`flex`}>
-              <GoogleLoginButton
+            <Stack
+              direction={`vertical`}
+              display={`flex`}
+              sx={{
+                gap: "10px",
+              }}
+            >
+              <Button
+              style={{
+                color: "grey",
+                boxShadow: "0px 0px 0px 1px #E1E3EA",
+                borderRadius: 5,
+                fontSize: 16,
+                height: 40,
+                display: "flex",
+                justifyContent:"space-between",
+                width: "100%"
+
+                // gap: "10px"
+              }}
+              >
+                <img  src="/assets/Google.svg"></img>
+               <div style={{textAlgin: "center", width: "100%"}}>
+                Sign in with Google
+               </div>
+              </Button>
+              <Button
+              style={{
+                color: "grey",
+                boxShadow: "0px 0px 0px 1px #E1E3EA",
+                borderRadius: 5,
+                fontSize: 16,
+                height: 40,
+                display: "flex",
+                width: "100%"
+
+                // gap: "10px"
+              }}
+              >
+                <img src="/assets/apple.svg" style={{width: 25, height:25}}></img>
+                <div style={{textAlgin: "center", width: "100%"}}>
+                Sign in with Apple
+               </div>
+              </Button>
+              {/* <GoogleLoginButton
                 // text=''
                 style={{
                   color: "grey",
+                  boxShadow: "0px 0px 0px 1px #E1E3EA",
+                  borderRadius: 5,
+                  fontSize: 16,
+                  height: 40,
+                  display: "inline-flex",
+                  justifyContent: "center",
+                  gap: "100px",
+
+                  // gap: "10px"
                 }}
                 text="Sign in with Google"
               ></GoogleLoginButton>
@@ -102,22 +190,39 @@ export const AccountDetailComponent = (props) => {
                 text="Sign in with Apple"
                 style={{
                   color: "grey",
+                  boxShadow: "0px 0px 0px 1px #E1E3EA",
+                  borderRadius: 5,
+                  fontSize: 16,
+                  height: 40,
+                  display: "inline-flex",
+                  justifyContent: "center",
                 }}
-              ></AppleLoginButton>
+              ></AppleLoginButton> */}
             </Stack>
-            <Divider textAligh="center">
+            <Divider textAlign="center" sx={{paddingTop: 3}}>
               <Typography variant="body2" sx={{ color: "gray" }}>
                 Or with email
               </Typography>
             </Divider>
             <form noValidate onSubmit={formik.handleSubmit}>
-              <Grid container spacing={3} mt={2}>
+              <Grid
+                container
+                spacing={3}
+                mt={2}
+                // sx={{
+                //   '& .MuiTextField-root': {  // Apply styles to all MUI TextFields
+                //     m: 1,
+                //     // width: '25ch',
+                //     height: 38
+                //   },
+                // }}
+              >
                 <Grid item xs={6}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.firstName && formik.errors.firsName)}
                     fullWidth
                     helperText={formik.touched.firstName && formik.errors.firstName}
-                    label="First Name"
+                    placeholder="First Name"
                     name="firstName"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
@@ -126,11 +231,11 @@ export const AccountDetailComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.lastName && formik.errors.lastName)}
                     fullWidth
                     helperText={formik.touched.lastName && formik.errors.lastName}
-                    label="Last Name"
+                    placeholder="Last Name"
                     name="lastName"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
@@ -139,11 +244,11 @@ export const AccountDetailComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.creatorName && formik.errors.creatorName)}
                     fullWidth
                     helperText={formik.touched.creatorName && formik.errors.creatorName}
-                    label="Creator Name"
+                    placeholder="Creator Name"
                     name="creatorName"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
@@ -152,11 +257,11 @@ export const AccountDetailComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.email && formik.errors.email)}
                     fullWidth
                     helperText={formik.touched.email && formik.errors.email}
-                    label="Email Address"
+                    placeholder="Email Address"
                     name="email"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
@@ -165,11 +270,11 @@ export const AccountDetailComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.phoneNumber && formik.errors.phoneNumber)}
                     fullWidth
                     helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-                    label="Phone Number"
+                    placeholder="Phone Number"
                     name="phoneNumber"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
@@ -178,36 +283,69 @@ export const AccountDetailComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.password && formik.errors.password)}
                     fullWidth
                     helperText={formik.touched.password && formik.errors.password}
-                    label="Password"
+                    placeholder="Password"
                     name="password"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={formik.values.password}
+                    InputProps={{
+                      endAdornment: <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <img src="/assets/eye.svg" ></img> : <img src="/assets/eye-slash.svg" ></img>}
+                        </IconButton>
+                      </InputAdornment>
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <StyledTextField
                     error={!!(formik.touched.confirmPassword && formik.errors.confirmPassword)}
                     fullWidth
                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                    label="Confirm Password"
+                    placeholder="Confirm Password"
                     name="confirmPassword"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    type="password"
+                    type={showConfirmPassword ? 'text' : 'password'}
                     value={formik.values.confirmPassword}
+                    InputProps={{
+                      endAdornment: <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowConfirmPassword}
+                          onMouseDown={handleMouseDownConfirmPassword}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? <img src="/assets/eye.svg" ></img> : <img src="/assets/eye-slash.svg" ></img>}
+                        </IconButton>
+                      </InputAdornment>
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <Stack direction="row" display={"flex"} alignItems={"center"}>
                     <Checkbox id="terms" name="terms" />
-                    <label htmlFor="terms" style={{ cursor: "pointer" }}>
-                      I Accept the <NextLink href="/terms">Terms</NextLink>
+                    <label  htmlFor="terms" style={{ cursor: "pointer", fontSize: 14 }}>
+                      I Accept the{" "}
+                      <NextLink
+                        href="/terms"
+                        style={{
+                          color: "#2884EF",
+                          textDecoration: "none",
+                        }}
+                      >
+                        Terms
+                      </NextLink>
                     </label>
                   </Stack>
                 </Grid>
@@ -220,7 +358,15 @@ export const AccountDetailComponent = (props) => {
                   {formik.errors.submit}
                 </Typography>
               )}
-              <Button fullWidth size="large" sx={{ mt: 3 }} type="submit" variant="contained">
+              <Button fullWidth size="large" sx={{ 
+                mt: 3,
+                backgroundColor:"#3E97FF",
+            '&:hover': { // hover styles
+              backgroundColor: '#0097FF',
+              color: 'white',
+            },
+            height: 40
+             }} type="submit" variant="contained">
                 Continue
               </Button>
               <Typography
@@ -229,7 +375,16 @@ export const AccountDetailComponent = (props) => {
                 mx={"auto"}
                 mt={4}
               >
-                Already have an Account? <NextLink href="signin">Sign in</NextLink>
+                Already have an Account?{" "}
+                <NextLink
+                  href="signin"
+                  style={{
+                    color: "#2884EF",
+                    textDecoration: "none",
+                  }}
+                >
+                  Sign in
+                </NextLink>
               </Typography>
             </form>
           </div>

@@ -50,7 +50,7 @@ export const TopNav = (props) => {
           height: TOP_NAV_HEIGHT,
           lineHeight: TOP_NAV_HEIGHT,
           // zIndex: (theme) => theme.zIndex.appBar,
-          zIndex: 2000,
+          zIndex: 1500,
           borderBottom: "1px solid #E1E3EA",
         }}
       >
@@ -71,7 +71,7 @@ export const TopNav = (props) => {
           </Stack>
 
           <Stack alignItems="center" direction="row" spacing={2}>
-            <Tooltip title="Notifications">
+            <Tooltip title="Notifications" >
               <IconButton>
                 <StyledBadge badgeContent={5} color="error" sx={{ fontSize: "10px" }}>
                   <SvgIcon>
@@ -81,7 +81,7 @@ export const TopNav = (props) => {
               </IconButton>
             </Tooltip>
 
-            <Tooltip title="Search">
+            <Tooltip title="Search" >
               <IconButton>
                 <SvgIcon>
                   <MagnifyingGlassIcon />

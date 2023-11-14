@@ -32,10 +32,10 @@ export const SideNavItem = (props) => {
           textAlign: "left",
           width: "100%",
           ...(active && {
-            backgroundColor: "rgba(255, 255, 255, 0.04)",
+            backgroundColor: "#EEF6FF",
           }),
           "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.04)",
+            backgroundColor: "#EEF6FF",
           },
         }}
         {...linkProps}
@@ -68,7 +68,7 @@ export const SideNavItem = (props) => {
             lineHeight: "24px",
             whiteSpace: "nowrap",
             ...(active && {
-              color: "common.white",
+              color: "#3E97FF",
             }),
             ...(disabled && {
               color: "neutral.500",

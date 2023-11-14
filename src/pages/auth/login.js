@@ -63,6 +63,15 @@ const Page = () => {
     },
   });
 
+  const StyleStepConnectorLine = styled("span")(() => ({
+    "& .MuiStepConnector-line": {
+      // borderLeftStyle: "dashed",
+      borderLeft: "1px dashed #FFFFFF4D",
+      marginTop: "-13px",
+      height: "40px",
+      marginBottom: "-13px",
+    },
+  }));
   const QontoStepLabelRoot = styled("div")(() => ({
     "& .title": {
       fontSize: "20px",
@@ -162,29 +171,45 @@ const Page = () => {
             alignItems: "center",
             background: "radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)",
             background: `url("/assets/left.jpg")`,
+            padding: "20px",
 
             color: "white",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             "& img": {
               maxWidth: "100%",
             },
           }}
         >
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ marginTop: "120px" }}>
             <img alt="" src="/assets/logo.svg" style={{ marginBottom: "120px" }} />
-
-            <Stepper activeStep={activeStep} orientation="vertical">
-              {steps.map((step, index) => (
-                <Step key={step.label}>
-                  <StepLabel StepIconComponent={QontoStepIcon}>{step.label}</StepLabel>
-                  <StepContent>
-                    <Typography>{step.description}</Typography>
-                  </StepContent>
-                </Step>
-              ))}
-            </Stepper>
+            <StyleStepConnectorLine>
+              <Stepper activeStep={activeStep} orientation="vertical">
+                {steps.map((step, index) => (
+                  <Step key={step.label}>
+                    <StepLabel StepIconComponent={QontoStepIcon}>{step.label}</StepLabel>
+                    <StepContent>
+                      <Typography>{step.description}</Typography>
+                    </StepContent>
+                  </Step>
+                ))}
+              </Stepper>
+            </StyleStepConnectorLine>
           </Box>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "auto",
+              marginBottom: "15px",
+              gap: "40px",
+              color: "#50CD89",
+            }}
+          >
+            <div>Terms</div>
+            <div>Plans</div>
+            <div>Contact Us</div>
+          </div>
         </Grid>
         {activeStep === 0 ? (
           <AccountTypeComponent
