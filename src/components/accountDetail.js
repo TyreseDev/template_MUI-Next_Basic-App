@@ -72,6 +72,7 @@ export const AccountDetailComponent = (props) => {
         display: "flex",
         flexDirection: "column",
         position: "relative",
+        overflowY: "auto",
       }}
     >
       {/* <Box
